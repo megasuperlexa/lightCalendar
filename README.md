@@ -1,7 +1,7 @@
 # lightCalendar
 Lightweight .Net library for time intervals
 
-It is a frequent need for a project to have ability to operate time priods that span across several days. 
+It is a frequent need for a project to have ability to operate time periods that span across several days. 
 This library aims to fix the lack of standard means of doing this.
 ## Period
 The main building block is Period struct. It has Start and End:
@@ -48,7 +48,7 @@ There are more examples in unit tests, please check them out.
 
 ## Fiscal year
 Another useful abstraction is FiscalYear. A fiscal year is a 12-month period that an organization uses to report its finances. 
-It does not necesserily starts or ends with calendar year. Leap year is taken into account, so if a Fiscal year ends on February there will not jump to March on non-leap years.
+It does not necesserily starts or ends with calendar year. Leap year is taken into account, so if a Fiscal year ends on February there will not be a jump to March on non-leap years.
 The most important fiscal year for the economy is the federal government's fiscal year. It defines the U.S. government's budget. It runs from October 1 of the budget's prior year through September 30 of the year being described. 
 ```cs
 // Create currently running Federal Discal Year
