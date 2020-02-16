@@ -125,7 +125,7 @@ namespace LightCalendarTests
             // Act
             var excluded = fourDays.Exclude(todayTomorrow);
             // Assert
-            Approvals.VerifyAll(excluded.GetDailySchedule(), "Day");
+            Approvals.VerifyAll(excluded.GetDailySchedule().Select(_ => _.ToShortDateString()), "Day");
             
         }
         
