@@ -135,7 +135,7 @@ namespace LightCalendarTests
             // Arrange
             var fy = FiscalYear.GetFiscalYear(new DateTime(2000,06,15), new DateTime(2020,11,1));
             
-            Approvals.VerifyAll(fy.GetDailySchedule(), "Day");
+            Approvals.VerifyAll(fy.GetDailySchedule().Select(_ => _.ToShortDateString()), "Day");
         }
 
         [Fact]
