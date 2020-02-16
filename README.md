@@ -1,7 +1,11 @@
 # lightCalendar
-Lightweight .Net library for time intervals
+[![Build status](https://ci.appveyor.com/api/projects/status/has18vp1j5lgdgqo?svg=true)](https://ci.appveyor.com/project/megasuperlexa/lightcalendar)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![NuGet Status](http://img.shields.io/nuget/v/LightCalendar.svg?style=flat)](https://www.nuget.org/packages/LightCalendar/)
 
-It is a frequent need for a project to have ability to operate time periods that span across several days. 
+Lightweight .Net library for time intervals.
+
+It is a frequent need for projects to have ability to operate time periods that span across several days. 
 This library aims to fix the lack of standard means of doing that.
 ## Period
 The main building block is Period struct. It has Start and End:
