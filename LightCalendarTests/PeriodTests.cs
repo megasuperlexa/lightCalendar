@@ -15,7 +15,9 @@ namespace LightCalendarTests
     {
         public PeriodTests()
         {
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;   
+            CultureInfo newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+            newCulture.DateTimeFormat.ShortDatePattern = "MM/dd/yyyy";
+            Thread.CurrentThread.CurrentCulture = newCulture;
         }
         
         [Fact]
