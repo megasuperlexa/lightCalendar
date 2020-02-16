@@ -2,7 +2,9 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using LightCalendar;
 using System;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using Xunit;
 
 [assembly:UseReporter(typeof(DiffReporter))]
@@ -11,6 +13,11 @@ namespace LightCalendarTests
 {
     public class PeriodTests
     {
+        public PeriodTests()
+        {
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;   
+        }
+        
         [Fact]
         public void DayCountTest()
         {
