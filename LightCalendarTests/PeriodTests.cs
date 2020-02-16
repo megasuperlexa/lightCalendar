@@ -24,12 +24,12 @@ namespace LightCalendarTests
             Assert.False(today.IsEmpty);
             Assert.Equal(1, today.GetDayCount());
             
-            Assert.True(todayTomorrow.GetDayCount() == 2); // count inclusive
+            Assert.Equal(2, todayTomorrow.GetDayCount()); // count inclusive
             
             Assert.True(todayYesterday.IsEmpty); // Empty period that ended before beginning
-            Assert.True(todayYesterday.GetDayCount() == 0);
+            Assert.Equal(0, todayYesterday.GetDayCount());
             
-            Assert.True(todayYesterday.GetDailySchedule().Count == 0);
+            Assert.Empty(todayYesterday.GetDailySchedule());
         }
 
         [Fact]
@@ -83,11 +83,12 @@ namespace LightCalendarTests
             var overlap4 = yesterdayTomorrow.Overlap(todayTomorrow);
             // Assert
             Assert.False(overlap1.IsEmpty);
-            Assert.True(overlap1.GetDayCount() == 1);
+            Assert.Equal(1, overlap1.GetDayCount());
             Assert.True(overlapWithEmpty.IsEmpty); // overlaping with empty
             Assert.True(overlap2.IsEmpty); // overlaping separate periods
             Assert.True(overlap3.IsEmpty);
-            Assert.True(overlap4.GetDayCount() == 2);
+            Assert.Equal(2, overlap4.GetDayCount());
+            Assert.True(yesterdayTomorrow.Contains(todayTomorrow));
         }
         
         [Fact]
@@ -138,15 +139,25 @@ namespace LightCalendarTests
                 (new DateTime(2020, 05, 01), .015),
                 (new DateTime(2020, 08, 15), .007),
             });
-            
+            // Assert
             Approvals.VerifyAll(periods.ToArray(), "Rate");
+        }
+        
+        [Fact]
+        public void FederalFyTest()
+        {
+            //FY 2020 is the budget for October 1, 2019 through September 30, 2020. 
+            var fy = FiscalYear.GetFiscalYear(new DateTime(2000,09,30), new DateTime(2020,1,1));
+            // Assert
+            Assert.Equal(new DateTime(2019, 10, 01),fy.Begin);
+            Assert.Equal(new DateTime(2020, 09, 30),fy.End);
         }
         
         [Fact]
         public void SeasonsTest()
         {
             var fy = FiscalYear.GetFiscalYear(new DateTime(2000,01,01), new DateTime(2020,11,1));
-            var periods = fy.GetPeriodValues(new[]
+            var periods = fy.GetPeriodValues(new[]     
             {
                 (new DateTime(2020, 01, 01), "Winter"),
                 (new DateTime(2020, 03, 01), "Spring"),
