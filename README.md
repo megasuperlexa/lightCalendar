@@ -2,7 +2,7 @@
 Lightweight .Net library for time intervals
 
 It is a frequent need for a project to have ability to operate time periods that span across several days. 
-This library aims to fix the lack of standard means of doing this.
+This library aims to fix the lack of standard means of doing that.
 ## Period
 The main building block is Period struct. It has Start and End:
 ```cs
