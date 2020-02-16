@@ -51,7 +51,7 @@ Another useful abstraction is FiscalYear. A fiscal year is a 12-month period tha
 It does not necesserily starts or ends with calendar year. Leap year is taken into account, so if a Fiscal year ends on February there will not be a jump to March on non-leap years.
 The most important fiscal year for the economy is the federal government's fiscal year. It defines the U.S. government's budget. It runs from October 1 of the budget's prior year through September 30 of the year being described. 
 ```cs
-// Create currently running Federal Discal Year
+// Create currently running Federal Fiscal Year
 var federalFiscalYear = FiscalYear.GetFiscalYear(new DateTime(2000,09,30), DateTime.UtcNow);
 Console.WriteLine(federalFiscalYear); // 10/1/2019 - 9/30/2020
 ```
