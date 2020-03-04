@@ -61,3 +61,41 @@ Console.WriteLine(federalFiscalYear); // 10/1/2019 - 9/30/2020
 ```
 Because fiscal year is a Period, you can do all usual stuff with it: overlap, intersect, exclude and combine with other Periods.
 Refer to unit tests in this project for more ideas.
+
+## Weeks
+Version 1.1.0 adds weeks creator. Weeks can start on different week days depending on standard. You can create several week factories and use them (e.g. via IoC injection) dynamically to create Period for any date's running week.
+```cs
+// Create factories for week period that differ by week beginning day
+var weekCreator = Period.FromWeekFactory(DayOfWeek.Monday);
+var weekCreator2 = Period.FromWeekFactory(DayOfWeek.Sunday);
+var weekCreator3 = Period.FromWeekFactory(DayOfWeek.Saturday);
+
+var currentIsoWeek = weekCreator(DateTime.UtcNow);
+var currentAmericanWeek = weekCreator2(DateTime.UtcNow);
+var currentMiddleEasternWeek = weekCreator3(DateTime.UtcNow);
+
+Console.WriteLine(currentIsoWeek); // 03/02/2020 - 03/08/2020
+Console.WriteLine(currentIsoWeek.Begin.DayOfWeek); // Monday
+Console.WriteLine(currentWeek.GetDayCount()); // 7
+Console.WriteLine(currentIsoWeek.GetDailySchedule());
+//[0] = {DateTime} "03/02/2020 5:12:50 PM"
+//[1] = {DateTime} "03/03/2020 5:12:50 PM"
+//[2] = {DateTime} "03/04/2020 5:12:50 PM"
+//[3] = {DateTime} "03/05/2020 5:12:50 PM"
+//[4] = {DateTime} "03/06/2020 5:12:50 PM"
+//[5] = {DateTime} "03/07/2020 5:12:50 PM"
+//[6] = {DateTime} "03/08/2020 5:12:50 PM"
+
+Console.WriteLine(currentAmericanWeek.GetDailySchedule());
+//[0] = {DateTime} "03/01/2020 5:20:38 PM"
+//[1] = {DateTime} "03/02/2020 5:20:38 PM"
+//[2] = {DateTime} "03/03/2020 5:20:38 PM"
+//[3] = {DateTime} "03/04/2020 5:20:38 PM"
+//[4] = {DateTime} "03/05/2020 5:20:38 PM"
+//[5] = {DateTime} "03/06/2020 5:20:38 PM"
+//[6] = {DateTime} "03/07/2020 5:20:38 PM"
+
+```
+
+
+
