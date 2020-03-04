@@ -7,7 +7,7 @@
     <PackageTags>time;periods;intervals;dates</PackageTags>
     <RepositoryUrl>https://github.com/megasuperlexa/lightCalendar</RepositoryUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Authors>Aliaksei Sosin</Authors>
   </PropertyGroup>
 
