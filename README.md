@@ -76,7 +76,7 @@ var currentMiddleEasternWeek = weekCreator3(DateTime.UtcNow);
 
 Console.WriteLine(currentIsoWeek); // 03/02/2020 - 03/08/2020
 Console.WriteLine(currentIsoWeek.Begin.DayOfWeek); // Monday
-Console.WriteLine(currentWeek.GetDayCount()); // 7
+Console.WriteLine(currentIsoWeek.GetDayCount()); // 7
 Console.WriteLine(currentIsoWeek.GetDailySchedule());
 //[0] = {DateTime} "03/02/2020 5:12:50 PM"
 //[1] = {DateTime} "03/03/2020 5:12:50 PM"
