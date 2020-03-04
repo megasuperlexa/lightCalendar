@@ -173,8 +173,35 @@ namespace LightCalendarTests
                 (new DateTime(2020, 06, 01), "Summer"),
                 (new DateTime(2020, 09, 01), "Winter again"),
             });
-            
+            // Assert
             Approvals.VerifyAll(periods.ToArray(), "Season");
+        }
+        
+        [Fact]
+        public void WeekTest()
+        {
+            var weekCreator = Period.FromWeekFactory(DayOfWeek.Monday);
+            var weekCreator2 = Period.FromWeekFactory(DayOfWeek.Sunday);
+            var weekCreator3 = Period.FromWeekFactory(DayOfWeek.Saturday);
+            
+            var currentIsoWeek = weekCreator(DateTime.UtcNow);
+            var currentAmericanWeek = weekCreator2(DateTime.UtcNow);
+            var currentMiddleEasternWeek = weekCreator3(DateTime.UtcNow);
+            
+            // Assert
+            Assert.Equal(7, currentIsoWeek.GetDayCount());
+            Assert.Equal(7, currentAmericanWeek.GetDayCount());
+            Assert.Equal(7, currentMiddleEasternWeek.GetDayCount());
+            
+            Assert.Equal(DayOfWeek.Monday, currentIsoWeek.Begin.DayOfWeek);
+            Assert.Equal(DayOfWeek.Sunday, currentIsoWeek.End.DayOfWeek);
+            
+            Assert.Equal(DayOfWeek.Sunday, currentAmericanWeek.Begin.DayOfWeek);
+            Assert.Equal(DayOfWeek.Saturday, currentAmericanWeek.End.DayOfWeek);
+                        
+            Assert.Equal(DayOfWeek.Saturday, currentMiddleEasternWeek.Begin.DayOfWeek);
+            Assert.Equal(DayOfWeek.Friday, currentMiddleEasternWeek.End.DayOfWeek);
+
         }
     }
 }

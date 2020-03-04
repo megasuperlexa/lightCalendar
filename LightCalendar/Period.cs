@@ -32,6 +32,13 @@ namespace LightCalendar
 
         public DateTime End { get; }
 
+        public static Func<DateTime, Period> FromWeekFactory(DayOfWeek weekStart) => currentDate
+            =>
+        {
+            var diff = currentDate.DayOfWeek - weekStart;
+            return (currentDate.AddDays(-diff), currentDate.AddDays(6 - diff));
+        };
+        
         public static Period FromMonth(DateTime month) => new Period(month.GetMonthStart(), month.GetMonthEnd());
 
         public static Period OneYearAhead(DateTime date)
@@ -170,7 +177,7 @@ namespace LightCalendar
             // partial periods logic
             var defaultValue = new { rateDate = DateTime.MaxValue, value = default(T) };
             var enumerable = dateValues.OrderBy(_ => _.date).Select(_ => new { rateDate = _.date, value = _.val }).ToList();
-            var periodRates = (from datePair in enumerable.Zip(enumerable.Skip(1), Tuple.Create, defaultValue)
+            var periodRates = (from datePair in enumerable.Zip(enumerable.Skip(1), ValueTuple.Create, defaultValue)
                                let ratePeriod = new Period(datePair.Item1.rateDate, datePair.Item2.rateDate.AddDays(-1)).Overlap(period) // use only common portion of periods
                                where !ratePeriod.IsEmpty && !datePair.Item1.value.Equals(default)
                                select (ratePeriod, rate: datePair.Item1.value))
